@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<um-configuration version="1.0">
+ <templates>
+  <template name="Sending-LBTRM">
+   <options type="source">
+    <option default-value="0" name="late_join"/>
+    <option default-value="500" name="resolver_advertisement_maximum_initial_interval"/>
+    <option default-value="5000" name="resolver_advertisement_minimum_initial_duration"/>
+    <option default-value="10" name="resolver_advertisement_minimum_initial_interval"/>
+    <option default-value="60" name="resolver_advertisement_minimum_sustain_duration"/>
+    <option default-value="1000" name="resolver_advertisement_sustain_interval"/>
+    <option default-value="lbtrm" name="transport"/>
+    <option default-value="14400" name="transport_lbtrm_destination_port"/>
+    <option default-value="0.0.0.0" name="transport_lbtrm_multicast_address"/>
+   </options>
+   <options type="context">
+    <option default-value="wsaeventselect" name="fd_management_type" order="deny,allow">
+     <deny>wincompport</deny>
+    </option>
+    <option default-value="5000" name="mim_delivery_control_activity_check_interval"/>
+    <option default-value="60000" name="mim_delivery_control_activity_timeout"/>
+    <option default-value="2000000" name="resolver_initial_advertisement_bps"/>
+    <option default-value="2000" name="resolver_initial_advertisements_per_second"/>
+    <option default-value="2000" name="resolver_initial_queries_per_second"/>
+    <option default-value="2000000" name="resolver_initial_query_bps"/>
+   </options>
+  </template>
+ </templates>
+ <applications>
+  <application name="Sending">
+   <contexts order="deny,allow">
+    <context rule="allow" template="Sending-LBTRM">
+     <sources order="deny,allow">
+      <topic rule="allow" topicname="IXCM">
+       <options type="source">
+        <option default-value="1" name="late_join"/>
+        <option default-value="lbtrm" name="transport"/>
+        <option default-value="14488" name="transport_lbtrm_destination_port"/>
+        <option default-value="224.12.5.101" name="transport_lbtrm_multicast_address"/>
+       </options>
+      </topic>
+     </sources>
+     <receivers order="deny,allow"/>
+     <wildcard-receivers order="deny,allow"/>
+     <options type="context">
+      <option default-value="224.9.10.11" name="resolver_multicast_address"/>
+      <option default-value="224.9.10.11" name="resolver_multicast_incoming_address"/>
+      <option default-value="12965" name="resolver_multicast_incoming_port"/>
+      <option default-value="224.9.10.11" name="resolver_multicast_outgoing_address"/>
+      <option default-value="12965" name="resolver_multicast_outgoing_port"/>
+      <option default-value="12965" name="resolver_multicast_port"/>
+      <option default-value="224.9.10.12" name="resolver_multicast_interface"/>
+      <option default-value="0" name="resolver_multicast_receiver_socket_buffer"/>
+      <option default-value="wsaeventselect" name="fd_management_type" order="deny,allow">
+       <deny>wincompport</deny>
+      </option>
+     </options>
+    </context>
+   </contexts>
+   <event-queues order="deny,allow">
+    <event-queue rule="allow">
+     <options type="event-queue">
+       <option default-value="lbm" name="monitor_transport"/>
+       <option default-value="" name="monitor_appid"/>
+     </options>
+    </event-queue>
+   </event-queues>
+  </application>
+ </applications>
+</um-configuration>
