@@ -2,29 +2,29 @@
     "key": 
     [
         {
-            "attr": "Profilazione",
+            "attr-value": "Profilazione",
             "target": "connectionString"
         },
         {
-            "attr": "User",
+            "attr-value": "User",
             "target": "value"
         },
         {
-            "attr": "Password",
+            "attr-value": "Password",
             "target": "value"
         }
     ],
     "option":
     [
         {
-            "attr": "value3",
+            "attr-value": "value3",
             "target": "value4"
         }
     ],
     "name":
     [
         {
-            "attr": "late_join",
+            "attr-value": "late_join",
             "target": "default-value"
         }
     ]

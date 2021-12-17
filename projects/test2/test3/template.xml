@@ -3,7 +3,7 @@
  <templates>
   <template name="Sending-LBTRM">
    <options type="source">
-    <option default-value="XXX" name="late_join"/>
+    <option default-value="test1" name="late_join"/>
     <option default-value="500" name="resolver_advertisement_maximum_initial_interval"/>
     <option default-value="5000" name="resolver_advertisement_minimum_initial_duration"/>
     <option default-value="10" name="resolver_advertisement_minimum_initial_interval"/>
@@ -35,7 +35,7 @@
      <sources order="deny,allow">
       <topic rule="allow" topicname="IXCM">
        <options type="source">
-        <option default-value="XXX" name="late_join"/>
+        <option default-value="test1" name="late_join"/>
         <option default-value="lbtrm" name="transport"/>
         <option default-value="14488" name="transport_lbtrm_destination_port"/>
         <option default-value="224.12.5.101" name="transport_lbtrm_multicast_address"/>

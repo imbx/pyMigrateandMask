@@ -97,6 +97,26 @@ print("\n--------------------------------")
 print("Config files extracted correctly")
 print("--------------------------------\n")
 
+checkers.cFolder("./output/")
+
+keydb = []
+fulldict = json.load(
+    open('xmldb.json')
+    )
+
+
+for key in folderDict:
+    for val in folderDict[key].paths:
+        filepath = os.path.join(
+                maskedconfig_path,
+                val["path"]
+            ) + "/" + val["name"] + val["ext"]
+        parser.ParseXML(filepath, fulldict, keydb)
+
+#parser.ParseXML("./template.xml", fulldict, keydb)
+
+tocsv.SaveCSV(str(currentTime + ".csv"), keydb)
+
 #checkers.cFolder(os.path.join(maskedconfig_path, new_path))
 #checkers.cFolder(os.path.join(config_path, new_path))
 
