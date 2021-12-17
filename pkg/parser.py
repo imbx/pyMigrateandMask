@@ -11,6 +11,7 @@ def ParseConfig(path, dict, db):
             if val == "tag":
                 db.append(
                     {
+                        path,
                         i, 
                         config[i]
                     }
@@ -38,6 +39,7 @@ def ParseXML(path, dict, db):
             for result in currentsearch:
                 db.append(
                     [
+                        path,
                         i["attr-value"], 
                         result["default-value"]
                     ]

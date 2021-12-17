@@ -104,6 +104,9 @@ fulldict = json.load(
     open('xmldb.json')
     )
 
+print("\n-------")
+print("MASKING")
+print("-------\n")
 
 for key in folderDict:
     for val in folderDict[key].paths:
@@ -114,16 +117,11 @@ for key in folderDict:
         if val["ext"] == ".xml" or val["ext"] == ".config":
             parser.ParseXML(filepath, fulldict, keydb)
 
-#parser.ParseXML("./template.xml", fulldict, keydb)
-
 tocsv.SaveCSV(str(currentTime + ".csv"), keydb)
 
-#checkers.cFolder(os.path.join(maskedconfig_path, new_path))
-#checkers.cFolder(os.path.join(config_path, new_path))
-
-#if not checkers.cFile(os.path.join(maskedconfig_path, new_path + name)): 
-#    shutil.copy(os.path.join(root, name), os.path.join(maskedconfig_path, new_path))
-#print("config file: " + name)
+print("\n--------")
+print("FINISHED")
+print("--------\n")
 
 
 
