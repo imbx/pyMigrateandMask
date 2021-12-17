@@ -111,7 +111,8 @@ for key in folderDict:
                 maskedconfig_path,
                 val["path"]
             ) + "/" + val["name"] + val["ext"]
-        parser.ParseXML(filepath, fulldict, keydb)
+        if val["ext"] == ".xml" or val["ext"] == ".config":
+            parser.ParseXML(filepath, fulldict, keydb)
 
 #parser.ParseXML("./template.xml", fulldict, keydb)
 
