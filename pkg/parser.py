@@ -84,4 +84,4 @@ def ParseXML(path, dict, db):
     for element in bsdata(text=lambda text: isinstance(text, Comment)):
         element.extract()
     f.write(bsdata.prettify())
-    print("MASKED!")
+    print("MASKED! {}".format(path))

@@ -6,16 +6,17 @@ from cx_Freeze import setup, Executable
 __version__ = '1.0.0'
 base = None
 if sys.platform == 'win32':
-    base = 'Win32GUI'
+    base = 'Win32'
+
 
 includes = ['pkg']
 packages = ['numpy', 'bs4', 'lxml', 'shutil', 'pkg']
 
 setup(
-    name='TestApp',
-    description='Test App',
+    name='MigrateAndMask',
+    description='Copy all config files to new folders and mask them based on config.json',
     version=__version__,
-    executables=[Executable('main.py', base=base)],
+    executables=[Executable('main.py')],
     options = {'build_exe': {
         'packages': packages,
         'includes': includes,

@@ -110,9 +110,6 @@ if cfg["maskdata"]:
     checkers.cFolder("./output/")
 
     keydb = []
-    fulldict = json.load(
-        open('xmldb.json')
-        )
 
     print("\n-------")
     print("MASKING")
@@ -125,13 +122,20 @@ if cfg["maskdata"]:
                     val["path"]
                 ) + "/" + val["name"] + val["ext"]
             if val["ext"] == ".xml" or val["ext"] == ".config":
-                parser.ParseXML(filepath, parseDict["xml"], keydb)
+                try:
+                    parser.ParseXML(filepath, parseDict["xml"], keydb)
+                except:
+                    print("Error trying to parse {}".format(filepath))
+                finally: 
+                    continue
 
     tocsv.SaveCSV(str(currentTime + ".csv"), keydb)
 
 print("\n--------")
 print("FINISHED")
 print("--------\n")
+
+input("Press Enter to exit")
 
 
 
