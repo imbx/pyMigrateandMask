@@ -1,0 +1,183 @@
+{
+    "output":
+    {
+        "projects_path"  : "./projects/",
+        "write_date": true,
+        "output_path" : "./config/cfg_",
+        "maskdata" : true,
+        "masked_output" : "./config/mcfg_",
+        "valid_ext" : 
+        [
+            ".xml",
+            ".appsettings",
+            ".config"
+        ],
+        "folder_exclusion":
+        [
+            "docs",
+            "packages"
+        ]
+    },
+    "dict":
+    {
+        "xml":
+        [
+            {
+                "search-attr": "name",
+                "search-val": "Password",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "DAOUserName",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "DAOPassword",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "DAODataSource",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "FaxLib_itmasfax01_FenMessage",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "OracleUser",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "OraclePassword",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "OracleDb",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "DestinatariMailPerGBM",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "OracleUserId",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "OraclePassword",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "ProfilazioneUser",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "ProfilazionePassword",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "UrlServizioProfilazione",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "MailServerAddress",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "MailUser",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "MailPassword",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "OracleDB",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "key",
+                "search-val": "LdapAuthenticationPath",
+                "target-attr": "value",
+                "target-tag": ""
+            },
+            {
+                "search-attr": "key",
+                "search-val": "ADDomain",
+                "target-attr": "value",
+                "target-tag": ""
+            },
+            {
+                "search-attr": "key",
+                "search-val": "SSODataConectionString",
+                "target-attr": "value",
+                "target-tag": ""
+            },
+            {
+                "search-attr": "key",
+                "search-val": "SSOService_Address",
+                "target-attr": "value",
+                "target-tag": ""
+            },
+            {
+                "search-attr": "key",
+                "search-val": "SSOFull_Address",
+                "target-attr": "value",
+                "target-tag": ""
+            },
+            {
+                "search-attr": "key",
+                "search-val": "connectionString",
+                "target-attr": "value",
+                "target-tag": ""
+            },
+            {
+                "search-attr": "key",
+                "search-val": "connectionStringOazis",
+                "target-attr": "value",
+                "target-tag": ""
+            },
+            {
+                "search-attr": "key",
+                "search-val": "rpConventionPath",
+                "target-attr": "value",
+                "target-tag": ""
+            }
+        ]
+    }
+}

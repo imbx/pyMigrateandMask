@@ -13,3 +13,9 @@ def cExtensions(name, vext):
         if name.endswith(ext):
             return True
     return False
+
+def cExclusions(path, excl):
+    for ex in excl:
+        if ex in path:
+            return  True
+    return False

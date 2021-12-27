@@ -2,23 +2,30 @@ import os
 import json
 from datetime import datetime
 from pkg.main_folder import MainFolder, MainFolderEncoder
+from config import o_config as cfg
+from config import p_dict as parseDict
 from pkg import * 
 
 currentTime = datetime.now().strftime("%d%m%Y%H%M%S")
 
-projects_path = "./projects/"
-maskedconfig_path = "./config/masked_" + currentTime + "/"
-config_path = "./config/config_" + currentTime + "/"
-
-valid_extensions = ['.config', '.xml', '.appsettings']
 
 print("\n----------------")
 print("Creating folders")
 print("----------------\n")
 
-checkers.cFolder(projects_path)
-checkers.cFolder(maskedconfig_path)
-checkers.cFolder(config_path)
+proj_path = cfg["projects_path"]
+out_path = cfg["output_path"]
+mask_path = cfg["masked_output"]
+
+if cfg["write_date"]:
+    out_path += currentTime + "/"
+    mask_path += currentTime + "/"
+
+checkers.cFolder(proj_path)
+checkers.cFolder(out_path)
+
+if cfg["maskdata"]:
+    checkers.cFolder(mask_path)
 
 folderDict = {}
 
@@ -26,7 +33,7 @@ print("\n----------------")
 print("Reading paths...")
 print("----------------\n")
 
-for p in os.listdir(projects_path):
+for p in os.listdir(proj_path):
     if not checkers.cFile(p):
         folderDict[p] = MainFolder(p)
 
@@ -34,13 +41,14 @@ print("\n-----------------------")
 print("Extracting config files")
 print("-----------------------\n")
 
+
 for key in folderDict:
     fa = str (folderDict[key])
-    path = os.path.join(projects_path , str(fa))
+    path = os.path.join(proj_path , str(fa))
     for root, dirs, files in os.walk(path, topdown=False):
         for name in files:
-            if checkers.cExtensions(name, valid_extensions) and checkers.cFile(os.path.join(root, name)):
-                new_path = root.replace(projects_path, '')
+            if checkers.cExtensions(name, cfg["valid_ext"]) and not checkers.cExclusions(root, cfg["folder_exclusion"]) and checkers.cFile(os.path.join(root, name)):
+                new_path = root.replace(proj_path, '')
                 fname, extension = os.path.splitext(name)
                 folderDict[key].paths.append(
                     {
@@ -51,25 +59,26 @@ for key in folderDict:
                     }
                 )
     for val in folderDict[key].paths:
-        utils.CopyFile(
-            os.path.join(
-                projects_path,
-                val["path"]
-            ) + "/"+ val["name"] +
-                val["ext"]
-            ,
-            os.path.join(
-                maskedconfig_path,
-                val["path"]
+        if cfg["maskdata"]:
+            utils.CopyFile(
+                os.path.join(
+                    proj_path,
+                    val["path"]
+                ) + "/"+ val["name"] +
+                    val["ext"]
+                ,
+                os.path.join(
+                    mask_path,
+                    val["path"]
+                )
             )
-        )
         utils.CopyAndRename(
             os.path.join(
-                projects_path,
+                proj_path,
                 val["path"]
             ) + "/",
             os.path.join(
-                config_path,
+                out_path,
                 val["path"]
             ),
             val["name"],
@@ -78,11 +87,11 @@ for key in folderDict:
         )
         utils.CopyAndRename(
             os.path.join(
-                projects_path,
+                proj_path,
                 val["path"]
             ) + "/",
             os.path.join(
-                config_path,
+                out_path,
                 val["path"]
             ),
             val["name"],
@@ -90,34 +99,35 @@ for key in folderDict:
             val["ext"]
         )
     
-with open(maskedconfig_path + currentTime + ".json", "w") as outfile:
+with open(out_path + currentTime + ".json", "w") as outfile:
     json.dump(folderDict, fp=outfile, cls=MainFolderEncoder)
 
 print("\n--------------------------------")
 print("Config files extracted correctly")
 print("--------------------------------\n")
 
-checkers.cFolder("./output/")
+if cfg["maskdata"]:
+    checkers.cFolder("./output/")
 
-keydb = []
-fulldict = json.load(
-    open('xmldb.json')
-    )
+    keydb = []
+    fulldict = json.load(
+        open('xmldb.json')
+        )
 
-print("\n-------")
-print("MASKING")
-print("-------\n")
+    print("\n-------")
+    print("MASKING")
+    print("-------\n")
 
-for key in folderDict:
-    for val in folderDict[key].paths:
-        filepath = os.path.join(
-                maskedconfig_path,
-                val["path"]
-            ) + "/" + val["name"] + val["ext"]
-        if val["ext"] == ".xml" or val["ext"] == ".config":
-            parser.ParseXML(filepath, fulldict, keydb)
+    for key in folderDict:
+        for val in folderDict[key].paths:
+            filepath = os.path.join(
+                    mask_path,
+                    val["path"]
+                ) + "/" + val["name"] + val["ext"]
+            if val["ext"] == ".xml" or val["ext"] == ".config":
+                parser.ParseXML(filepath, parseDict["xml"], keydb)
 
-tocsv.SaveCSV(str(currentTime + ".csv"), keydb)
+    tocsv.SaveCSV(str(currentTime + ".csv"), keydb)
 
 print("\n--------")
 print("FINISHED")
