@@ -16,6 +16,12 @@
         [
             "docs",
             "lib",
+            "exe",
+            "_reference",
+            "Binaries",
+            "binaries",
+            "ODI12_PROD",
+            "7-Zip",
             "Plugins",
             "packages"
         ]
