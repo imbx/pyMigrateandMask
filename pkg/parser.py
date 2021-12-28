@@ -8,10 +8,15 @@ def ParseXML(path, dict, db):
 
     if not bsdata:
         print("No file to read at {}".format(path))
-        return
+        return False
 
     for val in dict:
         currentsearch = bsdata.find_all(attrs = { val["search-attr"] : val["search-val"] })
+        
+        if currentsearch == []:
+            continue
+
+        print(currentsearch)
         for result in currentsearch:
             if not haswritten : haswritten = True
             print("Masking {}".format(result))
@@ -45,3 +50,4 @@ def ParseXML(path, dict, db):
         print("Nothing to mask! {}".format(path))
 
     f.close()
+    return haswritten

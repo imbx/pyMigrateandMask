@@ -58,7 +58,6 @@ for key in folderDict:
                     }
                 )
     for val in folderDict[key].paths:
-        time.sleep(1)
         if cfg["maskdata"] or cfg["generatemaskfiles"]:
             utils.CopyFile(
                 os.path.join(
@@ -123,8 +122,7 @@ if cfg["maskdata"]:
                 ) + "/" + val["name"] + val["ext"]
             if val["ext"] == ".xml" or val["ext"] == ".config":
                 try:
-                    parser.ParseXML(filepath, parseDict["xml"], keydb)
-                    time.sleep(3)
+                    val["masked"] = parser.ParseXML(filepath, parseDict["xml"], keydb)
                 except:
                     print("Error trying to parse {}".format(filepath))
                 finally: 
