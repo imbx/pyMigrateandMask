@@ -1,54 +1,4 @@
-import configparser
-import json, os
 from bs4 import BeautifulSoup, Comment
-
-def ParseConfig(path, dict, db):
-    config = configparser.ConfigParser()
-    config.read(path)
-
-    for val in dict:
-        for i in dict[val]:
-            if val == "tag":
-                db.append(
-                    {
-                        path,
-                        i, 
-                        config[i]
-                    }
-                )
-                pass
-            elif val == "":
-                pass
-
-    with open(path, 'w') as cfile:
-        config.write(cfile)
-    
-    print("File at " + path + " was masked!")
-
-
-def OLD_ParseXML(path, dict, db):
-    with open(path, 'r') as f:
-        data = f.read()
-        bsdata = BeautifulSoup(data, "xml")
-
-    if not bsdata:
-        return
-    for val in dict:
-        for i in dict[val]:
-            currentsearch = bsdata.find_all(attrs = { val : i["attr-value"] })
-            for result in currentsearch:
-                db.append(
-                    [
-                        path,
-                        i["attr-value"], 
-                        result["default-value"]
-                    ]
-                )
-                result["default-value"] = "XXX"
-    f = open(path, "w")
-    f.write(bsdata.prettify())
-    print("MASKED!")
-
 
 def ParseXML(path, dict, db):
     haswritten = False
@@ -57,12 +7,15 @@ def ParseXML(path, dict, db):
         bsdata = BeautifulSoup(data, "xml")
 
     if not bsdata:
+        print("No file to read at {}".format(path))
         return
+
     for val in dict:
         currentsearch = bsdata.find_all(attrs = { val["search-attr"] : val["search-val"] })
         for result in currentsearch:
+            if not haswritten : haswritten = True
+            print("Masking {}".format(result))
             if val["target-attr"] != "":
-                if not haswritten : haswritten = True
                 db.append(
                     [
                         path,
@@ -72,7 +25,6 @@ def ParseXML(path, dict, db):
                 )
                 result[val["target-attr"]] = "XXX"
             else:
-                if not haswritten : haswritten = True
                 for alter in result.select(val["target-tag"]):
                     db.append(
                         [
