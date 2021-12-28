@@ -33,7 +33,19 @@
         [
             {
                 "search-attr": "name",
+                "search-val": "UserId",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
                 "search-val": "Password",
+                "target-attr": "",
+                "target-tag": "value"
+            },
+            {
+                "search-attr": "name",
+                "search-val": "UseDbrId",
                 "target-attr": "",
                 "target-tag": "value"
             },
