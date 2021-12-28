@@ -122,7 +122,6 @@ if cfg["maskdata"]:
                     val["path"]
                 ) + "/" + val["name"] + val["ext"]
             if val["ext"] == ".xml" or val["ext"] == ".config":
-                time.sleep(1)
                 try:
                     parser.ParseXML(filepath, parseDict["xml"], keydb)
                     time.sleep(3)
