@@ -1,10 +1,9 @@
-import os
-import json
+import os, json, time
 from datetime import datetime
+from pkg import * 
 from pkg.main_folder import MainFolder, MainFolderEncoder
 from config import o_config as cfg
 from config import p_dict as parseDict
-from pkg import * 
 
 currentTime = datetime.now().strftime("%d%m%Y%H%M%S")
 
@@ -59,7 +58,8 @@ for key in folderDict:
                     }
                 )
     for val in folderDict[key].paths:
-        if cfg["maskdata"]:
+        time.sleep(1)
+        if cfg["maskdata"] or cfg["generatemaskfiles"]:
             utils.CopyFile(
                 os.path.join(
                     proj_path,
@@ -122,8 +122,10 @@ if cfg["maskdata"]:
                     val["path"]
                 ) + "/" + val["name"] + val["ext"]
             if val["ext"] == ".xml" or val["ext"] == ".config":
+                time.sleep(1)
                 try:
                     parser.ParseXML(filepath, parseDict["xml"], keydb)
+                    time.sleep(3)
                 except:
                     print("Error trying to parse {}".format(filepath))
                 finally: 

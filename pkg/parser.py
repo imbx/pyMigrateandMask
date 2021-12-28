@@ -51,6 +51,7 @@ def OLD_ParseXML(path, dict, db):
 
 
 def ParseXML(path, dict, db):
+    haswritten = False
     with open(path, 'r') as f:
         data = f.read()
         bsdata = BeautifulSoup(data, "xml")
@@ -61,6 +62,7 @@ def ParseXML(path, dict, db):
         currentsearch = bsdata.find_all(attrs = { val["search-attr"] : val["search-val"] })
         for result in currentsearch:
             if val["target-attr"] != "":
+                if not haswritten : haswritten = True
                 db.append(
                     [
                         path,
@@ -70,6 +72,7 @@ def ParseXML(path, dict, db):
                 )
                 result[val["target-attr"]] = "XXX"
             else:
+                if not haswritten : haswritten = True
                 for alter in result.select(val["target-tag"]):
                     db.append(
                         [
@@ -80,8 +83,13 @@ def ParseXML(path, dict, db):
                         )
                     alter.clear()
                     alter.insert(0, "XXX")
-    f = open(path, "w")
-    for element in bsdata(text=lambda text: isinstance(text, Comment)):
-        element.extract()
-    f.write(bsdata.prettify())
-    print("MASKED! {}".format(path))
+    if haswritten : 
+        f = open(path, "w")
+        for element in bsdata(text=lambda text: isinstance(text, Comment)):
+            element.extract()
+        f.write(bsdata.prettify())
+        print("MASKED! {}".format(path))
+    else :
+        print("Nothing to mask! {}".format(path))
+
+    f.close()

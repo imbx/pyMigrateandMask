@@ -4,6 +4,7 @@
         "projects_path"  : "./projects/",
         "write_date": true,
         "output_path" : "./config/cfg_",
+        "generatemaskfiles": true,
         "maskdata" : true,
         "masked_output" : "./config/mcfg_",
         "valid_ext" : 
@@ -176,6 +177,12 @@
             },
             {
                 "search-attr": "key",
+                "search-val": "ConnectionString",
+                "target-attr": "value",
+                "target-tag": ""
+            },
+            {
+                "search-attr": "key",
                 "search-val": "connectionStringOazis",
                 "target-attr": "value",
                 "target-tag": ""
@@ -183,6 +190,30 @@
             {
                 "search-attr": "key",
                 "search-val": "rpConventionPath",
+                "target-attr": "value",
+                "target-tag": ""
+            },
+            {
+                "search-attr": "key",
+                "search-val": "SQL2K_DataSource",
+                "target-attr": "value",
+                "target-tag": ""
+            },
+            {
+                "search-attr": "key",
+                "search-val": "SQL2K_Credentials",
+                "target-attr": "value",
+                "target-tag": ""
+            },
+            {
+                "search-attr": "key",
+                "search-val": "Oracle_DataSource",
+                "target-attr": "value",
+                "target-tag": ""
+            },
+            {
+                "search-attr": "key",
+                "search-val": "Oracle_Credentials",
                 "target-attr": "value",
                 "target-tag": ""
             }
