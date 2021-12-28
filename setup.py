@@ -3,12 +3,12 @@ import shutil
 import sys
 from cx_Freeze import setup, Executable
 
-__version__ = '1.0.0'
+__version__ = '1.0.6'
 base = None
 if sys.platform == 'win32':
     base = 'Win32'
 
-
+includefiles = ['README.md', 'config.json']
 includes = ['pkg']
 packages = ['numpy', 'bs4', 'lxml', 'shutil', 'pkg']
 
@@ -21,6 +21,7 @@ setup(
         'packages': packages,
         'includes': includes,
         'include_msvcr': True,
+        'include_files': includefiles
     }},
 )
 
